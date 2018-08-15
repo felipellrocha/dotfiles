@@ -1,0 +1,75 @@
+{
+  "editor.formatOnSave": true,
+  "editor.fontSize": 11,
+  "editor.renderWhitespace": "all",
+  "workbench.sideBar.location": "right",
+  "vim.foldfix": true,
+  "telemetry.enableTelemetry": false,
+  "vim.debug.loggingLevel": "error",
+  "workbench.editor.enablePreview": false,
+  "workbench.colorCustomizations": {
+    "editor.lineHighlightBackground": "#151515"
+  },
+  "files.exclude": {
+    "**/node_modules": true,
+    "**/logs": true,
+    "**/tmp": true,
+    "**/obj": true,
+    "**/obj_native": true,
+    "**/dist": true,
+    "**/vendor": true,
+    "**/assets": true,
+    "**/build": true,
+    "**/www": true,
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/CVS": true,
+    "**/.DS_Store": true
+  },
+  "vim.handleKeys": {
+    "<C-d>": true,
+    "<S-up>": true,
+    "<S-down>": true
+  },
+  "vim.normalModeKeyBindingsNonRecursive": [
+    {
+      "before": [";"],
+      "after": [":"]
+    },
+    {
+      "before": [":"],
+      "commands": ["workbench.action.showCommands"]
+    },
+    {
+      "before": [","],
+      "after": ["^"]
+    },
+    {
+      "before": ["."],
+      "after": ["$"]
+    },
+    {
+      "before": ["."],
+      "after": ["$"]
+    },
+    {
+      "before": ["<shift-up>"],
+      "commands": ["workbench.action.terminal.scrollUpPage"]
+    },
+    {
+      "before": ["<S-down>"],
+      "commands": ["workbench.action.terminal.scrollDownPage"]
+    }
+  ],
+  "vim.visualModeKeyBindingsNonRecursive": [
+    {
+      "before": [","],
+      "after": ["^"]
+    },
+    {
+      "before": ["."],
+      "after": ["$"]
+    }
+  ]
+}

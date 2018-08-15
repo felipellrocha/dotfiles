@@ -1,0 +1,23 @@
+// Place your key bindings in this file to overwrite the defaults
+[
+  {
+    "key": "shift+down",
+    "command": "workbench.action.terminal.scrollDownPage",
+    "when": "terminalFocus"
+  },
+  {
+    "key": "pagedown",
+    "command": "-workbench.action.terminal.scrollDownPage",
+    "when": "terminalFocus"
+  },
+  {
+    "key": "shift+up",
+    "command": "workbench.action.terminal.scrollUpPage",
+    "when": "terminalFocus"
+  },
+  {
+    "key": "pageup",
+    "command": "-workbench.action.terminal.scrollUpPage",
+    "when": "terminalFocus"
+  }
+]
