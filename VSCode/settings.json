@@ -4,8 +4,10 @@
   "editor.renderWhitespace": "all",
   "workbench.sideBar.location": "right",
   "vim.foldfix": true,
+  "editor.minimap.side": "left",
   "telemetry.enableTelemetry": false,
   "vim.debug.loggingLevel": "error",
+  "terminal.external.osxExec": "iTerm.app",
   "workbench.editor.enablePreview": false,
   "workbench.colorCustomizations": {
     "editor.lineHighlightBackground": "#151515"

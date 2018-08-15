@@ -1,0 +1,24 @@
+#!/bin/bash
+
+filename="./config"
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
+
+while read -r line
+do
+    file=$(echo "$line" | awk 'BEGIN{FS=":"}{print $1}')
+    from=$(echo "$line" | awk 'BEGIN{FS=":"}{print $2}')
+    to=$(echo "$line" | awk 'BEGIN{FS=":"}{print $3}')
+    to_path=""${HOME}${to}${file}""
+    from_path=""${DIR}${from}${file}""
+
+    if [ ! -L "$to_path" ]; then
+        # symlink doesn't exist. Let's create it
+        echo "Creating symlink:"
+        echo "$from_path -> $to_path"
+
+        ln -s $from_path $to_path
+    else
+        echo "Symlink already exists: "
+        echo "$from_path -> $to_path"
+    fi
+done < "$filename"
