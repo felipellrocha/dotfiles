@@ -92,6 +92,7 @@ export BOOTSTRAP=/Users/fllr/Development/web/apps/bootstrap
 export INFRASTRUCTURE=/Users/fllr/Development/infrastructure
 
 export ALOHA=/Users/fllr/Development/aloha/apps/dashboard
+export DOTFILES=/Users/fllr/dotfiles
 
 : ~BREX
 : ~TM
@@ -110,6 +111,7 @@ export ALOHA=/Users/fllr/Development/aloha/apps/dashboard
 : ~BOOTSTRAP
 : ~INFRASTRUCTURE
 : ~ALOHA
+: ~DOTFILES
 
 # aliases
 alias cg='grep --exclude=yarn.lock --exclude=\*.{map,svg,log,json,backup,sql,csv,yml,md,txt} --exclude=\*{node_modules,storybook-static,vendor,build,dist,__generated__,db,tmp}\/\*'

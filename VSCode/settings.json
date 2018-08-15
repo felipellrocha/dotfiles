@@ -4,6 +4,7 @@
   "editor.renderWhitespace": "all",
   "workbench.sideBar.location": "right",
   "vim.foldfix": true,
+  "workbench.editor.labelFormat": "short",
   "editor.minimap.side": "left",
   "telemetry.enableTelemetry": false,
   "vim.debug.loggingLevel": "error",
