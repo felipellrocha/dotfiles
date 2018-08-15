@@ -1,3 +1,9 @@
-/keybindings.json:/VSCode:/Library/Application Support/Code/User
-/settings.json:/VSCode:/Library/Application Support/Code/User
-/snippets:/VSCode:/Library/Application Support/Code/User
+VSCode/keybindings.json : Library/Application Support/Code/User/keybindings.json
+VSCode/settings.json : Library/Application Support/Code/User/settings.json
+VSCode/snippets : Library/Application Support/Code/User/snippets
+
+// vim
+vim/config : .vimrc
+
+// zsh
+zsh/config : .zshrc

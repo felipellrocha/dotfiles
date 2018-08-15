@@ -5,20 +5,26 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
 
 while read -r line
 do
-    file=$(echo "$line" | awk 'BEGIN{FS=":"}{print $1}')
-    from=$(echo "$line" | awk 'BEGIN{FS=":"}{print $2}')
-    to=$(echo "$line" | awk 'BEGIN{FS=":"}{print $3}')
-    to_path=""${HOME}${to}${file}""
-    from_path=""${DIR}${from}${file}""
-
-    if [ ! -L "$to_path" ]; then
-        # symlink doesn't exist. Let's create it
-        echo "Creating symlink:"
-        echo "$from_path -> $to_path"
-
-        ln -s $from_path $to_path
+    if [ -z "${line}" ]; then
+        continue
+    elif [[ $line == //* ]]; then
+        continue
     else
-        echo "Symlink already exists: "
-        echo "$from_path -> $to_path"
+        from=$(echo "$line" | awk 'BEGIN{FS=" : "}{print $1}')
+        to=$(echo "$line" | awk 'BEGIN{FS=" : "}{print $2}')
+
+        echo "Processing: $line"
+        to_path=""${HOME}/${to}""
+        from_path=""${DIR}/${from}""
+
+        if [ ! -L "$to_path" ]; then
+            # symlink doesn't exist. Let's create it
+            echo "Creating symlink:"
+            echo "$from_path -> $to_path"
+
+            ln -s $from_path $to_path
+        #else
+            #echo "Symlink already exists: $to_path"
+        fi
     fi
 done < "$filename"

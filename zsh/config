@@ -1,0 +1,195 @@
+# If you come from bash you might have to change your $PATH.
+# export PATH=$HOME/bin:/usr/local/bin:$PATH
+
+# Path to your oh-my-zsh installation.
+export ZSH=/Users/fllr/.oh-my-zsh
+
+# Set name of the theme to load. Optionally, if you set this to "random"
+# it'll load a random theme each time that oh-my-zsh is loaded.
+# See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
+ZSH_THEME="robbyrussell"
+
+# Set list of themes to load
+# Setting this variable when ZSH_THEME=random
+# cause zsh load theme from this variable instead of
+# looking in ~/.oh-my-zsh/themes/
+# An empty array have no effect
+# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
+
+# Uncomment the following line to use case-sensitive completion.
+# CASE_SENSITIVE="true"
+
+# Uncomment the following line to use hyphen-insensitive completion. Case
+# sensitive completion must be off. _ and - will be interchangeable.
+# HYPHEN_INSENSITIVE="true"
+
+# Uncomment the following line to disable bi-weekly auto-update checks.
+# DISABLE_AUTO_UPDATE="true"
+
+# Uncomment the following line to change how often to auto-update (in days).
+# export UPDATE_ZSH_DAYS=13
+
+# Uncomment the following line to disable colors in ls.
+# DISABLE_LS_COLORS="true"
+
+# Uncomment the following line to disable auto-setting terminal title.
+# DISABLE_AUTO_TITLE="true"
+
+# Uncomment the following line to enable command auto-correction.
+# ENABLE_CORRECTION="true"
+
+# Uncomment the following line to display red dots whilst waiting for completion.
+# COMPLETION_WAITING_DOTS="true"
+
+# Uncomment the following line if you want to disable marking untracked files
+# under VCS as dirty. This makes repository status check for large repositories
+# much, much faster.
+# DISABLE_UNTRACKED_FILES_DIRTY="true"
+
+# Uncomment the following line if you want to change the command execution time
+# stamp shown in the history command output.
+# The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
+# HIST_STAMPS="mm/dd/yyyy"
+
+# Would you like to use another custom folder than $ZSH/custom?
+# ZSH_CUSTOM=/path/to/new-custom-folder
+
+# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
+# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
+# Example format: plugins=(rails git textmate ruby lighthouse)
+# Add wisely, as too many plugins slow down shell startup.
+
+export PATH=$HOME/.bin:$PATH
+
+plugins=(
+  git
+)
+
+autoload -U zmv
+
+source $ZSH/oh-my-zsh.sh
+
+# User configuration
+
+# exports
+export BREX=/Users/fllr/Documents/brex
+export TM=/Users/fllr/Development/tm-landing
+export CREDITCARD=/Users/fllr/Development/credit_card
+export WEB=/Users/fllr/Development/web
+export REVIEW=/Users/fllr/Development/review
+export LANDING=/Users/fllr/Development/landing
+export APPS=/Users/fllr/Development/web/apps
+export REPORTS=/Users/fllr/Development/web/apps/reports
+export SERVICES=/Users/fllr/Development/web/apps/services
+export DATA=/Users/fllr/Development/web/apps/data
+export CORE=/Users/fllr/Development/web/apps/core
+export VIEW=/Users/fllr/Development/web/apps/view
+export DASHBOARD=/Users/fllr/Development/web/apps/dashboard
+export LEGACY=/Users/fllr/Development/web/apps/legacy
+export ENDTOEND=/Users/fllr/Development/web/apps/endtoend
+export BOOTSTRAP=/Users/fllr/Development/web/apps/bootstrap
+export INFRASTRUCTURE=/Users/fllr/Development/infrastructure
+
+export ALOHA=/Users/fllr/Development/aloha/apps/dashboard
+
+: ~BREX
+: ~TM
+: ~CREDITCARD
+: ~WEB
+: ~REVIEW
+: ~LANDING
+: ~APPS
+: ~REPORTS
+: ~SERVICES
+: ~DATA
+: ~CORE
+: ~DASHBOARD
+: ~LEGACY
+: ~ENDTOEND
+: ~BOOTSTRAP
+: ~INFRASTRUCTURE
+: ~ALOHA
+
+# aliases
+alias cg='grep --exclude=yarn.lock --exclude=\*.{map,svg,log,json,backup,sql,csv,yml,md,txt} --exclude=\*{node_modules,storybook-static,vendor,build,dist,__generated__,db,tmp}\/\*'
+alias ag='grep --exclude=\*{node_modules,dist,db,tmp}\'
+alias vim-install='vim +PlugInstall +qall'
+
+# functions
+function reach() {
+  node_modules/.bin/$@
+}
+
+function docker-shell {
+  docker-compose run $1 /bin/bash
+}
+
+function build-container() {
+  if [[ "$#" -eq 1 ]]
+  then
+    docker-compose up -d --build $1
+  else
+    local container=$(basename `pwd`)
+    docker-compose up -d --build $container
+  fi
+}
+
+function docker-logs() {
+  if [[ "$#" -eq 1 ]]
+  then
+    docker-compose logs -f $1
+  else
+    local container=$(basename `pwd`)
+
+    docker-compose logs -f $container
+  fi
+}
+
+function rebuild-container() {
+  if [[ "$#" -eq 1 ]]
+  then
+    docker-compose stop $1
+    docker-compose rm -f $1
+    docker-compose build $1
+    docker-compose up -d $1
+  else
+    local container=$(basename `pwd`)
+
+    docker-compose stop $container
+    docker-compose rm -f $container
+    docker-compose build $container
+    docker-compose up -d $container
+  fi
+}
+
+function rebuild-n-log() {
+  if [[ "$#" -eq 1 ]]
+  then
+    docker-compose rm -f $1 && docker-compose build $1 && docker-compose up $1
+  else
+    local container=$(basename `pwd`)
+
+    docker-compose rm -f $container && docker-compose build $container && docker-compose up $container
+  fi
+}
+
+alias docker-cleanup="docker rmi $(docker images -f dangling=true -q)"
+alias dc='docker-compose'
+alias rnl="rebuild-n-log"
+alias dl='docker-logs'
+alias ds='docker-shell'
+
+
+function get-tty() {
+  echo `ps -o tty= -p $$`
+}
+
+# go settings
+export GOPATH=$HOME/.go
+export PATH=$PATH:$GOPATH/bin
+
+# nodenv
+
+eval "$(nodenv init -)"
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
