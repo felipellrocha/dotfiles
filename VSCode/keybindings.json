@@ -65,7 +65,7 @@
     "when": "terminalFocus"
   },
   {
-    "key": "shift+m",
+    "key": "shift+cmd+m",
     "command": "workbench.action.quickOpen"
   },
   {
@@ -73,7 +73,7 @@
     "command": "-workbench.action.quickOpen"
   },
   {
-    "key": "shift+m",
+    "key": "shift+cmd+m",
     "command": "workbench.action.quickOpenNavigateNextInFilePicker",
     "when": "inFilesPicker && inQuickOpen"
   },
@@ -101,5 +101,9 @@
     "key": "shift+cmd+l",
     "command": "-editor.action.selectHighlights",
     "when": "editorFocus"
+  },
+  {
+    "key": "shift+cmd+m",
+    "command": "-workbench.actions.view.problems"
   }
 ]
