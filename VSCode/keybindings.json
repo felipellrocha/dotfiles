@@ -2,23 +2,13 @@
 [
   {
     "key": "shift+down",
-    "command": "workbench.action.terminal.scrollDownPage",
-    "when": "terminalFocus"
-  },
-  {
-    "key": "pagedown",
-    "command": "-workbench.action.terminal.scrollDownPage",
-    "when": "terminalFocus"
+    "command": "scrollPageDown",
+    "when": "editorFocus"
   },
   {
     "key": "shift+up",
-    "command": "workbench.action.terminal.scrollUpPage",
-    "when": "terminalFocus"
-  },
-  {
-    "key": "pageup",
-    "command": "-workbench.action.terminal.scrollUpPage",
-    "when": "terminalFocus"
+    "command": "scrollPageUp",
+    "when": "editorFocus"
   },
   {
     "key": "cmd+d",
@@ -65,7 +55,7 @@
     "when": "terminalFocus"
   },
   {
-    "key": "cmd+m",
+    "key": "shift+cmd+m",
     "command": "workbench.action.quickOpen"
   },
   {
@@ -73,7 +63,7 @@
     "command": "-workbench.action.quickOpen"
   },
   {
-    "key": "cmd+m",
+    "key": "shift+cmd+m",
     "command": "workbench.action.quickOpenNavigateNextInFilePicker",
     "when": "inFilesPicker && inQuickOpen"
   },
@@ -101,5 +91,39 @@
     "key": "shift+cmd+l",
     "command": "-editor.action.selectHighlights",
     "when": "editorFocus"
+  },
+  {
+    "key": "shift+cmd+m",
+    "command": "-workbench.actions.view.problems"
+  },
+  {
+    "key": "shift+cmd+f",
+    "command": "editor.action.startFindReplaceAction"
+  },
+  {
+    "key": "alt+cmd+f",
+    "command": "-editor.action.startFindReplaceAction"
+  },
+  {
+    "key": "ctrl+cmd+f",
+    "command": "workbench.action.findInFiles"
+  },
+  {
+    "key": "shift+cmd+f",
+    "command": "-workbench.action.findInFiles"
+  },
+  {
+    "key": "ctrl+cmd+f",
+    "command": "workbench.view.search",
+    "when": "!searchViewletVisible"
+  },
+  {
+    "key": "shift+cmd+f",
+    "command": "-workbench.view.search",
+    "when": "!searchViewletVisible"
+  },
+  {
+    "key": "ctrl+cmd+f",
+    "command": "-workbench.action.toggleFullScreen"
   }
 ]
