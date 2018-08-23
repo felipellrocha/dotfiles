@@ -22,7 +22,7 @@ do
             echo "Creating symlink:"
             echo "$from_path -> $to_path"
 
-            ln -s $from_path $to_path
+            ln -s "$from_path" "$to_path"
         #else
             #echo "Symlink already exists: $to_path"
         fi

@@ -1,0 +1,129 @@
+export ZSH=/Users/fllr/.oh-my-zsh
+
+ZSH_THEME="robbyrussell"
+
+HYPHEN_INSENSITIVE="true"
+DISABLE_AUTO_UPDATE="true"
+
+setopt HIST_IGNORE_ALL_DUPS
+setopt AUTO_NAME_DIRS
+
+plugins=(
+  git
+)
+
+# User configuration
+
+export PATH="/usr/local/bin"
+export PATH="$PATH:/usr/local/share/dotnet"
+export PATH="$PATH:/usr/bin"
+export PATH="$PATH:/bin"
+export PATH="$PATH:/usr/sbin"
+export PATH="$PATH:/sbin"
+export PATH="$PATH:/Users/fllr/.cargo/bin"
+
+export GOROOT=/usr/local/opt/go/libexec
+export GOPATH=$HOME/.go
+export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
+
+# Web Assembly
+export PATH="$PATH:/Users/fllr/emsdk"
+export PATH="$PATH:/Users/fllr/emsdk/clang/e1.37.26_64bit"
+export PATH="$PATH:/Users/fllr/emsdk/node/8.9.1_64bit/bin"
+export PATH="$PATH:/Users/fllr/emsdk/emscripten/1.37.26"
+
+export EMSDK=/Users/fllr/emsdk
+export EM_CONFIG=/Users/fllr/.emscripten
+export BINARYEN_ROOT=/Users/fllr/emsdk/clang/e1.37.26_64bit/binaryen
+export EMSCRIPTEN=/Users/fllr/emsdk/emscripten/1.37.26
+
+: ~EMSDK ~EM_CONFIG ~EMSCRIPTEN ~BINARYEN_ROOT
+
+function docker-shell {
+  docker-compose run $1 /bin/bash
+}
+alias ds='docker-shell'
+
+function docker-migrate {
+  docker-compose run $1 sql-migrate $2 -config="$1/migration.config" -env="production" $@[3,-1]
+}
+alias dm='docker-migrate'
+
+function migrate {
+  sql-migrate $1 -config="migration.config" -env="development" $@[2,-1]
+}
+
+function build-container() {
+  if [[ "$#" -eq 1 ]]
+  then
+    docker-compose up -d --build $1
+  else
+    local container=$(basename `pwd`)
+    docker-compose up -d --build $container
+  fi
+}
+
+function docker-logs() {
+  if [[ "$#" -eq 1 ]]
+  then
+    docker-compose logs -f $1
+  else
+    local container=$(basename `pwd`)
+
+    docker-compose logs -f $container
+  fi
+}
+
+alias dl='docker-logs'
+
+function rebuild-container() {
+  if [[ "$#" -eq 1 ]]
+  then
+    docker-compose stop $1
+    docker-compose rm -f $1
+    docker-compose build $1
+    docker-compose up -d $1
+  else
+    local container=$(basename `pwd`)
+
+    docker-compose stop $container
+    docker-compose rm -f $container
+    docker-compose build $container
+    docker-compose up -d $container
+  fi
+}
+
+function rebuild-n-log() {
+  if [[ "$#" -eq 1 ]]
+  then
+    docker-compose rm -f $1 && docker-compose build $1 && docker-compose up $1
+  else
+    local container=$(basename `pwd`)
+
+    docker-compose rm -f $container && docker-compose build $container && docker-compose up $container
+  fi
+}
+
+alias docker-cleanup="docker rmi $(docker images -f dangling=true -q)"
+
+alias rnl="rebuild-n-log"
+
+alias ga='git add -p .'
+alias cg='grep --exclude=\*.{log,json,sql,csv,yml,md,txt} --exclude=\*{node_modules,vendor,__generated__,db,tmp,dist}\/\*'
+alias ag='grep --exclude=\*{node_modules,dist,db,tmp}\'
+
+alias mnative='make -f Makefile.native'
+alias mwasm='make -f Makefile.wasm'
+alias dc='docker-compose'
+alias vim-install='vim +PlugInstall +qall'
+
+GAME=/Users/fllr/.go/src/game
+ZELDA=/Users/fllr/Development/zelda
+: ~GAME ~ZELDA
+# enable autocompletion
+
+RSI=/Users/fllr/Development/rsi
+: ~RSI
+
+source $ZSH/oh-my-zsh.sh
+eval "$(pyenv init -)"
